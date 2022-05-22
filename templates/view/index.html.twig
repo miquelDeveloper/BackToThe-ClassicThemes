@@ -1,0 +1,15 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ViewController!{% endblock %}
+
+{% block body %}
+
+<h1>Hi {{d}}</h1> 
+<p>{{user.name}}</p>
+
+<ul>
+{% for data in a %}
+    <li>{{data}}</li>
+{% endfor %}
+</ul>
+{% endblock %}
