@@ -1,0 +1,15 @@
+{% extends 'base-web.html.twig' %}
+
+{% block title %}Hello CategorieController!{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('admin_messages') %}
+        <div class="alert alert-success">
+            <h3>{{message }}</h3>
+        </div>
+    {% endfor %}
+    <br>
+    <div class="container">
+    <h2> Dashboard </h2>
+    </div>
+{% endblock %}

@@ -2,15 +2,15 @@
 
 namespace App\Entity;
 
-use App\Repository\CategorieRepository;
+use App\Repository\CategoryRepository;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass=CategorieRepository::class)
+ * @ORM\Entity(repositoryClass=CategoryRepository::class)
  */
-class Categorie
+class Category
 {
     /**
      * @ORM\Id
@@ -23,15 +23,21 @@ class Categorie
      * @ORM\Column(type="string", length=255)
      */
     private $name;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     */
+    private $parent;
     
     /**
-     * @ORM\OneToMany(targetEntity="App\Entity\Gericht", mappedBy="categorie")
+     * @ORM\OneToMany(targetEntity="App\Entity\Gericht", mappedBy="category")
      */
     private $gericht;
 
     public function __construct()
     {
         $this->gericht = new ArrayCollection();
+        $this->parent = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -63,7 +69,7 @@ class Categorie
     {
         if (!$this->gericht->contains($gericht)) {
             $this->gericht[] = $gericht;
-            $gericht->setCategorie($this);
+            $gericht->setCategory($this);
         }
 
         return $this;
@@ -73,16 +79,31 @@ class Categorie
     {
         if ($this->gericht->removeElement($gericht)) {
             // set the owning side to null (unless already changed)
-            if ($gericht->getCategorie() === $this) {
-                $gericht->setCategorie(null);
+            if ($gericht->getCategory() === $this) {
+                $gericht->setCategory(null);
             }
         }
 
         return $this;
     }
 
+    public function setParent(Category $category): self
+    {
+        if(!$this->parent->contains($category)){
+            $this->parent[] = $category;
+        }
+
+        return $this;
+
+    }
+
     public function __toString()
     {
         return $this->name;
+    }
+
+    public function getParent(): ?string
+    {
+        return $this->parent;
     }
 }

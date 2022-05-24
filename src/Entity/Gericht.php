@@ -38,9 +38,9 @@ class Gericht
     private $bild; // image
     
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Categorie", inversedBy="gericht")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Category", inversedBy="gericht")
      */
-    private $categorie;
+    private $category;
 
     public function getId(): ?int
     {
@@ -95,14 +95,26 @@ class Gericht
         return $this;
     }
 
-    public function getCategorie(): ?Categorie
+    public function getCategory(): ?Category
     {
-        return $this->categorie;
+        return $this->category;
     }
 
-    public function setCategorie(?Categorie $categorie): self
+    public function setCategory(?Category $category): self
     {
-        $this->categorie = $categorie;
+        $this->category = $category;
+
+        return $this;
+    }
+
+    public function getCategorie(): ?Category
+    {
+        return $this->category;
+    }
+
+    public function setCategorie(?Category $category): self
+    {
+        $this->category = $category;
 
         return $this;
     }

@@ -4,6 +4,7 @@ namespace App\Controller;
 
 use App\Entity\Bestellung;
 use App\Entity\Gericht;
+use App\Repository\BestellungRepository;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Response;
@@ -12,16 +13,21 @@ use Symfony\Component\Routing\Annotation\Route;
 class BestellungController extends AbstractController
 {
     /**
-     * @Route("/bestellung", name="app_bestellung")
+     * @Route("/bestellung", name="bestellung")
      */
-    public function index(): Response
+    public function index(BestellungRepository $bestellungRepository): Response
     {
+        $bestellung = $bestellungRepository->findBy(
+            ['tisch' => 'tisch1']
+        );
+
+
         return $this->render('bestellung/index.html.twig', [
-            'controller_name' => 'BestellungController',
+            'bestellungen' => $bestellung,
         ]);
     }
     /**
-     * @Route("/bestellen/{id}", name="bestellen")
+     * @Route("/bestellen/{id?}", name="bestellen")
      */
     public function bestellen(Gericht $gericht,ManagerRegistry $doctrine){
         $bestellung = new Bestellung();
@@ -39,5 +45,28 @@ class BestellungController extends AbstractController
 
         return $this->redirect($this->generateUrl('menu'));
 
+    }
+
+    /**
+     * @Route("/status/{id?}, {status}", name="status")
+     */
+    public function status($id, $status, ManagerRegistry $doctrine){
+        $em = $doctrine->getManager();
+        $bestellung = $em->getRepository(Bestellung::class)->find($id);
+        $bestellung->setStatus($status);
+        $em->flush();
+        return $this->redirect($this->generateUrl('bestellung'));
+    }
+
+    /**
+     * @Route("/delete/{id}", name="bestellung_delete")
+     */
+    public function entfernen($id, BestellungRepository $repo,ManagerRegistry $doctrine){
+        $em = $doctrine->getManager();
+        $bestellung = $repo->find($id);
+        $em->remove($bestellung);
+        $em->flush();
+        $this->addFlash('erfolg','Geride deleted');
+        return $this->redirect($this->generateUrl('bestellung'));
     }
 }

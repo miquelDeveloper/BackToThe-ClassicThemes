@@ -9,7 +9,7 @@ use EasyCorp\Bundle\EasyAdminBundle\Router\CrudUrlGenerator;
 use EasyCorp\Bundle\EasyAdminBundle\Controller\AbstractDashboardController;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
-
+use Symfony\Component\Security\Core\Security;
 
 class EcommerceDashboardController extends AbstractDashboardController
 {   
@@ -18,15 +18,15 @@ class EcommerceDashboardController extends AbstractDashboardController
      */
     public function index(): Response
     {
-        $routeBuilder = $this->get(AdminUrlGenerator::class)->build();
-
-        return $this->redirect($routeBuilder->setController(OneOfYourCrudController::class)->generateUrl());
+        return $this->render('admin/index.html.twig', [
+            'Admin_controller' => 'AdmnController'
+        ]);
     }
 
     public function configureDashboard(): Dashboard
     {
-        return Dashboard::new()
-            ->setTitle('Test');
+            return Dashboard::new()
+                ->setTitle('Test');
     }
 
     public function configureMenuItems(): iterable

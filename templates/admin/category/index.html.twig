@@ -1,0 +1,37 @@
+{% extends 'base-web.html.twig' %}
+
+{% block title %}Hello CategorieController!{% endblock %}
+
+{% block body %}
+    {% for message in app.flashes('admin_crud_category') %}
+        <div class="alert alert-success">
+            <h3>{{message }}</h3>
+        </div>
+    {% endfor %}
+    <br>
+    <div class="container">
+    <h2> Categories </h2>
+    <br>
+    <table class="table table-striped">
+    <a href="{{ path ('gericht.anlegen')}}"> Add category</a>
+    <thead>
+        <tr>
+            <td>Id</td>
+            <td>Name</td>
+            <td><a href="{{ path ('gericht.anlegen')}}">Anlegen</a></td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for category in list %}
+            <tr>
+                <td>{{category.id}}</td>                
+                <td>{{category.name}}</td>
+                <td>N</td>
+
+                
+        </tr>
+        {% endfor %}
+    </tbody>
+    </table>
+    </div>
+{% endblock %}

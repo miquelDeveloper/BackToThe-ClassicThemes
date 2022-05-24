@@ -2,6 +2,11 @@
 
 {% block title %}Hello HomeController!{% endblock %}
 {% block body %}
+{% for message in app.flashes('user_messages') %}
+        <div class="alert alert-success">
+            <h3>{{message }}</h3>
+        </div>
+    {% endfor %}
 <!-- Hero section -->
 	<section class="hero-section">
 		<div class="hero-slider owl-carousel">
@@ -13,6 +18,7 @@
 								<h2><span>{{gericht1.name}}</span> for everyone.</h2>
 								<p>Lorem ipsum dolor sit {{gericht1.beschreibung}} amet, {{gericht1.preis}}</p>
 								<a href="{{path('menu')}}" class="site-btn">MenuKarte</a>
+								<a href="{{path('bestellen', {id: gericht1.id})}}" class="site-btn">Bestellen</a>
 								<a href="#" class="site-btn sb-c2">Start free trial</a>
 							</div>
 						</div>
@@ -32,7 +38,7 @@
 								<h2><span>{{gericht2.name}}</span> for everyone.</h2>
 								<p>Lorem ipsum dolor sit {{gericht2.beschreibung}} amet, {{gericht2.preis}}</p>
 								<a href="{{path('menu')}}" class="site-btn">MenuKarte</a>
-								<a href="#" class="site-btn sb-c2">Start free trial</a>
+								<a href="{{path('bestellen', {id: gericht2.id})}}" class="site-btn">Bestellen</a>
 							</div>
 						</div>
 						<div class="col-lg-6">
