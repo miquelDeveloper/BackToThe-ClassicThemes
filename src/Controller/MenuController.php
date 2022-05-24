@@ -10,12 +10,14 @@ use Symfony\Component\Routing\Annotation\Route;
 class MenuController extends AbstractController
 {
     /**
-     * @Route("/menu", name="app_menu")
+     * @Route("/menu", name="menu")
      */
     public function menu(GerichtRepository $gr): Response
     {
+        $gerichte = $gr->findAll();
+
         return $this->render('menu/index.html.twig', [
-            'controller_name' => 'MenuController',
+            'gerichte' => $gerichte,
         ]);
     }
 }

@@ -1,6 +1,49 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-web.html.twig' %}
 
 {% block title %}Hello HomeController!{% endblock %}
-
 {% block body %}
+<!-- Hero section -->
+	<section class="hero-section">
+		<div class="hero-slider owl-carousel">
+			<div class="hs-item">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="hs-text">
+								<h2><span>{{gericht1.name}}</span> for everyone.</h2>
+								<p>Lorem ipsum dolor sit {{gericht1.beschreibung}} amet, {{gericht1.preis}}</p>
+								<a href="{{path('menu')}}" class="site-btn">MenuKarte</a>
+								<a href="#" class="site-btn sb-c2">Start free trial</a>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="hr-img">
+								<img src="{{asset('uploads/') ~ gericht1.bild }}" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="hs-item">
+				<div class="container">
+					<div class="row">
+						<div class="col-lg-6">
+							<div class="hs-text">
+								<h2><span>{{gericht2.name}}</span> for everyone.</h2>
+								<p>Lorem ipsum dolor sit {{gericht2.beschreibung}} amet, {{gericht2.preis}}</p>
+								<a href="{{path('menu')}}" class="site-btn">MenuKarte</a>
+								<a href="#" class="site-btn sb-c2">Start free trial</a>
+							</div>
+						</div>
+						<div class="col-lg-6">
+							<div class="hr-img">
+								<img src="{{asset('uploads/') ~ gericht2.bild }}" alt="">
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+	<!-- Hero section end -->
 {% endblock %}

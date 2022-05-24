@@ -48,7 +48,7 @@ class RegistrationController extends AbstractController
             $em = $doctrine->getManager();
             $em->persist($user);
             $em->flush();
-            dump($formData);
+            //dump($formData);
             return $this->redirect($this->generateUrl('home'));
         }
 

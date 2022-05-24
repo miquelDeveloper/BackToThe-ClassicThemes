@@ -1,0 +1,19 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "(PHP) xDebug",
+            "type": "php",
+            "request": "launch",
+            "port": 9000,
+            "xdebugSettings": {
+              "show_hidden": 1,
+              "max_children": 8192,
+              "max_data": -1
+            }
+          }
+    ]
+}

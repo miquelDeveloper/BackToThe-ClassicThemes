@@ -1,20 +1,42 @@
-{% extends 'base.html.twig' %}
+{% extends 'base-web.html.twig' %}
 
 {% block title %}Hello MenuController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
-
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/miquel/desenvolupament/symfonTest/test/src/Controller/MenuController.php'|file_link(0) }}">src/Controller/MenuController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/miquel/desenvolupament/symfonTest/test/templates/menu/index.html.twig'|file_link(0) }}">templates/menu/index.html.twig</a></code></li>
-    </ul>
-</div>
+{% for message in app.flashes('bestell') %}
+    <div class="alert alert-success">
+        <h3>{{ message }}</h3>
+    </div>
+{% endfor %}
+<section class="playlist-section spad">
+		<div class="container-fluid">
+			<div class="section-title">
+				<h2>Playlists</h2>
+			</div>
+			<div class="container">
+				<ul class="playlist-filter controls">
+					<li class="control" data-filter=".genres">Genres</li>
+					<li class="control" data-filter=".artists">Artists</li>
+					<li class="control" data-filter=".movies">Movies Soundtracks</li>
+					<li class="control" data-filter=".labels">Labels</li>
+					<li class="control" data-filter="all">All Playlist</li>
+				</ul>
+			</div>
+			<div class="clearfix"></div>
+			<div class="row playlist-area">
+            {% for gericht in gerichte %}
+				<div class="mix col-lg-3 col-md-4 col-sm-6 {{gericht.categorie}}">
+					<div class="playlist-item">
+						<img src="{{asset('uploads/' ~ gericht.bild )}}" alt="">
+						<h5>{{gericht.beschreibung}} - {{gericht.preis}}</h5>
+                        <p>_BestNr. {{gericht.id}}</p>
+                        <a class="btn btn-outline-danger btn-sm" href="{{path('bestellen', {id: gericht.id})}}" role="button">
+                            Bestellen
+                        </a>
+					</div>
+				</div>
+            {% endfor %}
+			</div>
+		</div>
+	</section>
 {% endblock %}

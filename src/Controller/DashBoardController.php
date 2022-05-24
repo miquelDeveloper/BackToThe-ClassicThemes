@@ -9,11 +9,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class DashBoardController extends AbstractController
 {
     /**
-     * @Route("/dash/board", name="app_dash_board")
+     * @Route("/dashboard", name="app_dashboard")
      */
     public function index(): Response
     {
-        return $this->render('dash_board/index.html.twig', [
+        return $this->render('dashboard/index.html.twig', [
             'controller_name' => 'DashBoardController',
         ]);
     }
