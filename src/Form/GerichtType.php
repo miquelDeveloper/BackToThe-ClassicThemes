@@ -2,7 +2,7 @@
 
 namespace App\Form;
 
-use App\Entity\Categorie;
+use App\Entity\Category;
 use App\Entity\Gericht;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\Form\AbstractType;
@@ -19,8 +19,8 @@ class GerichtType extends AbstractType
             ->add('name')
             ->add('anhang', FileType::class, ['mapped' => false])
             ->add('beschreibung')
-            ->add('categorie', EntityType::class,[
-                'class' => Categorie::class
+            ->add('category', EntityType::class,[
+                'class' => Category::class
             ])
             ->add('preis')
             ->add('Save', SubmitType::class)
