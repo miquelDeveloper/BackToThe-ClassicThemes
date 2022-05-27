@@ -24,25 +24,11 @@
                 <td>{{bestellung.bnumber}}</td>
                 <td>{{bestellung.name}}</td>
                 <td>{{bestellung.preis}}</td>
-                <td>{{bestellung.status}}</td>
+                {% if not is_granted('IS_AUTHENTICATED_FULLY') %}
+                    <td>{{bestellung.status}}</td>
+                {% endif %}
+                {% if is_granted('IS_AUTHENTICATED_FULLY') %}
                 <td>
-                    <select id="status" >
-                        <option href="{{ path('status',{id: bestellung.id, status: 'offen'})}}" value="{{ bestellung.name }}">offen</option>
-                        <option value="saab">fertig</option>
-                        <option value="opel">arquiv</option>
-                    </select>
-                    <div class="btn-group">
-  <button type="button" class="btn btn-danger dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-    Action
-  </button>
-  <div class="dropdown-menu">
-    <a class="dropdown-item" href="#">Action</a>
-    <a class="dropdown-item" href="#">Another action</a>
-    <a class="dropdown-item" href="#">Something else here</a>
-    <div class="dropdown-divider"></div>
-    <a class="dropdown-item" href="#">Separated link</a>
-  </div>
-</div>
                     <div class="dropdown show">
                         <a class="btn btn-secondary dropdown-toggle" href="#" role="button" id="dropdownMenuLink1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             {{bestellung.status}}
@@ -54,10 +40,18 @@
                         </div>
                     </div>
                 </td>
+                {% endif %}
                 <td>
+                <select id="status" >
+                        <option href="{{ path('status',{id: bestellung.id, status: 'offen'})}}" value="{{ bestellung.name }}">offen</option>
+                        <option value="saab">fertig</option>
+                        <option value="opel">arquiv</option>
+                    </select>
+                    {% bestellung.statuds == 'offen' %}
                     <a class="btn btn-outline-danger btn-sm" href="{{ path('bestellung_delete', {id: bestellung.id}) }}" role="button">
                         Delete
                     </a>
+                    {% endif %}
                 </td>
             </tr>
         {% endfor %}
