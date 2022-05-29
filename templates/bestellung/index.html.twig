@@ -19,7 +19,7 @@
     </thead>
     <tbody>
         {% for bestellung in bestellungen %}
-        {% set sume = sume + bestellung.preis %}
+            {% set sume = sume + bestellung.preis %}
             <tr>
                 <td>{{bestellung.bnumber}}</td>
                 <td>{{bestellung.name}}</td>
@@ -47,7 +47,7 @@
                         <option value="saab">fertig</option>
                         <option value="opel">arquiv</option>
                     </select>
-                    {% bestellung.statuds == 'offen' %}
+                    {% if (bestellung.status == 'offen') %}
                     <a class="btn btn-outline-danger btn-sm" href="{{ path('bestellung_delete', {id: bestellung.id}) }}" role="button">
                         Delete
                     </a>
