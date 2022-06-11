@@ -11,15 +11,15 @@ use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 class RegistrationController extends AbstractController
 {
     /**
      * @Route("/reg", name="reg")
      */
-    public function reg(Request $request, UserPasswordEncoderInterface $passEncoder, ManagerRegistry $doctrine): Response
+    public function reg(Request $request, UserPasswordHasherInterface $passEncoder, ManagerRegistry $doctrine): Response
     {
         $regform = $this->createFormBuilder()
             ->add('username', TextType::class,[
@@ -42,7 +42,7 @@ class RegistrationController extends AbstractController
             $user->setUsername($formData['username']);
 
             $user->setPassword(
-                $passEncoder->encodePassword($user, $formData['password'])
+                $passEncoder->hashPassword($user, $formData['password'])
             );
 
             $em = $doctrine->getManager();

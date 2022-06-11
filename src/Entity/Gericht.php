@@ -106,16 +106,4 @@ class Gericht
 
         return $this;
     }
-
-    public function getCategorie(): ?Category
-    {
-        return $this->category;
-    }
-
-    public function setCategorie(?Category $category): self
-    {
-        $this->category = $category;
-
-        return $this;
-    }
 }
